@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Assembler - QUAC-8</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<table>
+		<tr>
+			<td class="navbar"><a href="index.html">Play</a></td>
+			<td class="navbar"><a href="disks.html">Disks</a></td>
+			<td class="navbar"><a href="asm.html">Assembler</a></td>
+		</tr>
+	</table>
+	<div id="asmdiv">
+		<div id="codebox">
+			<div id="linenums"></div>
+			<pre id="asmcode" contenteditable="true"
+				oninput="codeChanged(this);"><div>RESET:</div><div><br /></div><div><br /></div><div>HWINT:</div><div><br /></div><div><br /></div></pre>
+		</div>
+		<input type="hidden" id="actualcode" value="" />
+		<input type="text" id="diskname" placeholder="disk.quac" />
+		<input type="text" id="filename" placeholder="filename" />
+	</div>
+	<button type="button" id="asmbutton" onclick="assembleCode();">Assemble and save code</button>
+
+	<script src="js/libs/he.min.js"></script>
+	<script src="js/diskapi.js"></script>
+	<script src="js/asm.js"></script>
+</body>
+
+</html>
