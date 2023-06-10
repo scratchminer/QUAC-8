@@ -56,7 +56,7 @@ function assembleCode() {
 
 window.onload = function() {
 	storageAvailable();
-	WebAssembly.instantiateStreaming(fetch("wasm/customasm.gc.wasm")).then(result => {
+	WebAssembly.instantiateStreaming(fetch("wasm/customasm.wasm")).then(result => {
 		instance = result.instance;
 	});
 	fetch("wasm/header.inc").then(resp => resp.text()).then(result => {
