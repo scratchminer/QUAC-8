@@ -1,4 +1,4 @@
-# QUAC-8 - The Quartered Analog-adding Computer
+# QUAC-8 - The QUartered Analog Computer
 
 This was my first foray into HTML/CSS/JS when I actually got something done (mostly).
 

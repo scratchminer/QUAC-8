@@ -1,21 +1,6 @@
 document.body.onload = function() {
 
 	let start, previousTimestamp;
-	
-	// https://stackoverflow.com/questions/25582882/javascript-math-random-normal-distribution-gaussian-bell-curve
-	function gaussian(min, max) {
-		let u = 0, v = 0;
-		while (u === 0) u = Math.random(); // Converting [0,1) to (0,1)
-		while (v === 0) v = Math.random();
-		let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
-		num = num / 10.0 + 0.5; // Translate to 0 -> 1
-		if (num > 1 || num < 0) num = randn_bm(min, max); // resample between 0 and 1 if out of range
-		else {
-			num *= max - min; // Stretch to fill range
-			num += min; // offset to min
-		}
-		return num
-	}
 
 	function plot(x, y, color, pxArr) {
 		var red = Math.round(((color & 0xe0) >> 5) / 8 * 255);
@@ -362,37 +347,37 @@ document.body.onload = function() {
 			return 1;
 		},
 		function(s) { //0x41 - ADA B
-			s.acc += s.br + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc += s.br;
 			s.flags.overflow = s.acc > 0xff;
 			return 1;
 		},
 		function(s) { //0x42 - ADA C
-			s.acc += s.cr + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc += s.cr;
 			s.flags.overflow = s.acc > 0xff;
 			return 1;
 		},
 		function(s) { //0x43 - ADA addr
-			s.acc += read(read16(s.pc + 1)) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc += read(read16(s.pc + 1));
 			s.flags.overflow = s.acc > 0xff;
 			return 3;
 		},
 		function(s) { //0x44 - ADA imm
-			s.acc += read(s.pc + 1) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc += read(s.pc + 1);
 			s.flags.overflow = s.acc > 0xff;
 			return 2;
 		},
 		function(s) { //0x45 - ADA addr, B
-			s.acc += read(read16(s.pc + 1) + s.br) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc += read(read16(s.pc + 1) + s.br);
 			s.flags.overflow = s.acc > 0xff;
 			return 3;
 		},
 		function(s) { //0x46 - ADA (addr, B)
-			s.acc += read(read16(read16(s.pc + 1) + s.br)) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc += read(read16(read16(s.pc + 1) + s.br));
 			s.flags.overflow = s.acc > 0xff;
 			return 3;
 		},
 		function(s) { //0x47 - ADA (addr), C
-			s.acc += read(read16(read16(s.pc + 1)) + s.cr) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc += read(read16(read16(s.pc + 1)) + s.cr);
 			s.flags.overflow = s.acc > 0xff;
 			return 3;
 		},
@@ -401,37 +386,37 @@ document.body.onload = function() {
 			return 1;
 		},
 		function(s) { //0x49 - SBA B
-			s.acc -= s.br + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc -= s.br;
 			s.flags.overflow = s.acc < 0;
 			return 1;
 		},
 		function(s) { //0x4A - SBA C
-			s.acc -= s.cr + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc -= s.cr;
 			s.flags.overflow = s.acc < 0;
 			return 1;
 		},
 		function(s) { //0x4B - SBA addr
-			s.acc -= read(read16(s.pc + 1)) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc -= read(read16(s.pc + 1));
 			s.flags.overflow = s.acc < 0;
 			return 3;
 		},
 		function(s) { //0x4C - SBA imm
-			s.acc -= read(s.pc + 1) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc -= read(s.pc + 1);
 			s.flags.overflow = s.acc < 0;
 			return 2;
 		},
 		function(s) { //0x4D - SBA addr, B
-			s.acc -= read(read16(s.pc + 1) + s.br) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc -= read(read16(s.pc + 1) + s.br);
 			s.flags.overflow = s.acc < 0;
 			return 3;
 		},
 		function(s) { //0x4E - SBA (addr, B)
-			s.acc -= read(read16(read16(s.pc + 1) + s.br)) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc -= read(read16(read16(s.pc + 1) + s.br));
 			s.flags.overflow = s.acc < 0;
 			return 3;
 		},
 		function(s) { //0x4F - SBA (addr), C
-			s.acc -= read(read16(read16(s.pc + 1)) + s.cr) + (Math.abs(gaussian(-8, 8)) & 0xff);
+			s.acc -= read(read16(read16(s.pc + 1)) + s.cr);
 			s.flags.overflow = s.acc < 0;
 			return 3;
 		},
