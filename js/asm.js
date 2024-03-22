@@ -32,8 +32,10 @@ function hexStrToBinary(hexStr) {
 function assembleCode() {
 	if (!instance || !header || !footer) return;
 	var asmPtr = makeRustString(header + "\n" + he.decode(document.getElementById("actualcode").value) + "\n" + footer);
-	var outputPtr = instance.exports.wasm_assemble(4, asmPtr);
+	var typePtr = makeRustString("hexstr");
+	var outputPtr = instance.exports.wasm_assemble(typePtr, asmPtr);
 	var output = readRustString(outputPtr);
+	dropRustString(typePtr);
 	dropRustString(asmPtr);
 	dropRustString(outputPtr);
 
