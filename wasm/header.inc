@@ -154,17 +154,9 @@
 	stc ({addr: u16}), b => 0xfd @ le(addr)
 }
 
-#bankdef ident {
-	#addr 0x8000
-	#size 10
-	#outp 0
-}
-
-#d ascii("QUAC-8 ROM")
-
 #bankdef code {
 	#addr 0x8000
 	#size 0x7ffc
-	#outp 8 * 10
+	#outp 0
 	#fill
 }
